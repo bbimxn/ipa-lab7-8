@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Router detail</title>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <p><a href="/">&larr; Back</a></p>
+        <h1>{{ router.ip }}</h1>
+        <p>Username: {{ router.username }}</p>
+
+        {% for snapshot in history %}
+        <h3>{{ snapshot.timestamp }}</h3>
+        <table border="1" cellpadding="4">
+            <tr>
+                <th>Interface</th>
+                <th>IP Address</th>
+                <th>Status</th>
+                <th>Protocol</th>
+            </tr>
+            {% for iface in snapshot.interfaces %}
+            <tr>
+                <td>{{ iface.interface }}</td>
+                <td>{{ iface.ip_address }}</td>
+                <td>{{ iface.status }}</td>
+                <td>{{ iface.proto }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No interface status recorded yet.</p>
+        {% endfor %}
+    </body>
+</html>
