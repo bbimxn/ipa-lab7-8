@@ -17,7 +17,7 @@ RABBITMQ_HOST = os.environ.get("RABBITMQ_HOST", "localhost")
 RABBITMQ_USER = os.environ.get("RABBITMQ_DEFAULT_USER", "guest")
 RABBITMQ_PASS = os.environ.get("RABBITMQ_DEFAULT_PASS", "guest")
 
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URI, connect=False)
 db = client[DB_NAME]
 interface_status = db["interface_status"]
 

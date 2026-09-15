@@ -1,6 +1,9 @@
+version: '3.3'
 services:
   web:
     build: ./web
+    security_opt:
+      - seccomp:unconfined
     ports:
       - "8080:8080"
     depends_on:
@@ -14,7 +17,7 @@ services:
       DB_NAME: "ipa2026_db"
 
   mongo:
-    image: mongo:6
+    image: mongo:4.4
     ports:
       - "27017:27017"
     volumes:
@@ -25,7 +28,7 @@ services:
       - .env
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:3-management-alpine
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -50,6 +53,8 @@ services:
 
   worker:
     build: ./worker
+    security_opt:
+      - seccomp:unconfined
     depends_on:
       - mongo
       - rabbitmq

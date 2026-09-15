@@ -1,5 +1,5 @@
 pika
-pymongo
+pymongo==3.12.3
 python-dotenv
 netmiko
 textfsm

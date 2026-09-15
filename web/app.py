@@ -9,7 +9,7 @@ app = Flask(__name__)
 mongo_uri = os.environ.get("MONGO_URI", "mongodb://mongo:27017/")
 db_name = os.environ.get("DB_NAME", "ipa2026_db")
 
-client = MongoClient(mongo_uri)
+client = MongoClient(mongo_uri, connect=False)
 db = client[db_name]
 routers = db["routers"]
 interface_status = db["interface_status"]
@@ -53,4 +53,4 @@ def router_detail(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    app.run(debug=True, host="0.0.0.0", port=8080, threaded=False)
